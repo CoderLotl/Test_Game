@@ -1,6 +1,5 @@
 import { DataAccess } from "../classes/DataAccess.js";
 import { urlTarget } from "../config/config.js";
-import "../config/config.js";
 
 let dataAccess = new DataAccess();
 let gameParams;
