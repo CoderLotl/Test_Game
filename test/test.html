@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page 1</title>
+</head>
+<body>
+    <h1>Page 1</h1>
+    <button id="goToPage2">Go to Page 2</button>
+
+    <script>
+        document.getElementById("goToPage2").addEventListener("click", function () {
+            // Get the parameter value you want to pass
+            var parameterValue = "Hello from Page 1";
+
+            // Encode the parameter value to ensure it's URL-safe
+            var encodedParameterValue = encodeURIComponent(parameterValue);
+
+            // Redirect to Page 2 with the parameter in the URL
+            window.location.href = "test2.html?param=" + encodedParameterValue;
+        });
+    </script>
+</body>
+</html>
