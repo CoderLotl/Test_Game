@@ -119,6 +119,7 @@ export class ItemSearchFilters
         if(selectedConsoles)
         {
             filters['console'] = selectedConsoles;
+            console.log(filters['console']);
         }
 
         // TYPE FILTER

@@ -52,7 +52,7 @@ async function SearchGames()
 {
     let displayContainer = document.getElementById('itemsDisplay');
     
-    let games = await dataAccess.RetrieveGames(urlTarget, searchCriteria);
+    let games = await dataAccess.RetrieveGames(urlTarget, searchCriteria, valorDolar);
     if(games !== false)
     {
         displayContainer.innerHTML = '';

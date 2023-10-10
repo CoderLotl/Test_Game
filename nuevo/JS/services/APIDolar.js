@@ -1,3 +1,9 @@
+/**
+ * Does a GET fetch() to the API DolarAPI [ 'https://dolarapi.com/v1/dolares' ].
+ * Returns the value of the Blue Dollar on success, false on failure. 
+ * @export
+ * @return {string | false} 
+ */
 export async function GetDollarValue()
 {
     const response = await fetch( 'https://dolarapi.com/v1/dolares',

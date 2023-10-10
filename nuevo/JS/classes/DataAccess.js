@@ -39,7 +39,7 @@ export class DataAccess
      * @param {*} searchCriteria
      * @memberof DataAccess
      */
-    async RetrieveGames(urlTarget, searchCriteria)
+    async RetrieveGames(urlTarget, searchCriteria, valorDolar)
     {
         try
         {
@@ -48,6 +48,7 @@ export class DataAccess
             if(data !== false)
             {                
                 let filters = this.itemSearchFilters.GetFilter(searchCriteria);
+                filters.valorDolar = valorDolar;
                 let filterFunction = this.FilterData(filters);
                 let result = data.filter(filterFunction);
                 return result;
@@ -102,12 +103,21 @@ export class DataAccess
                 else if(key === 'price') // WE CHECK IF THERE'S A MIN AND MAX PRICE, AND IF THE GAME'S PRICE IS IN BETWEEN.
                 {
                     let [priceMin, priceMax] = params[key];
-                    if( (priceMin && item.price < priceMin) || (priceMax && item.price > priceMax) )
+                    let itemPrice;
+                    if(params['valorDolar'] !== false)
+                    {
+                        itemPrice = item.price * params['valorDolar'];                        
+                    }
+                    else
+                    {
+                        itemPrice = item.price;
+                    }
+                    if( (priceMin && itemPrice < priceMin) || (priceMax && itemPrice > priceMax) )
                     {
                         return false; // IF IT'S NOT, THE GAME IS NOT INCLUDED.
                     }
                 }
-                else // WE CHECK FOR THE OTHER KEYS AND THEIR ARRAYS OF VALUES.
+                else if(key === 'console') // WE CHECK FOR THE OTHER KEYS AND THEIR ARRAYS OF VALUES.
                 {
                     let selectedConsole = params[key];
                     if(!selectedConsole.includes(item[key]))
