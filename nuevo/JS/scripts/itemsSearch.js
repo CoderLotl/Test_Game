@@ -41,7 +41,9 @@ document.addEventListener('DOMContentLoaded', async ()=>
     {
         SetCriteria();
         SearchGames();
-    });    
+    });
+
+    AutoSearchByReceivedParams();
 });
 // end of [ LOAD EVENT ]
 
@@ -138,6 +140,22 @@ function SetPriceTag()
     {
         priceTag.textContent += ' (U$)';
         dollarInfo.title = `(!) No se pudo conectar con DolarAPI.`;
+    }
+}
+
+function AutoSearchByReceivedParams()
+{
+    try
+    {
+        if(window.location.search.split('=')[1])
+        {
+            searchCriteria = window.location.search.split('=')[1];
+            SearchGames();
+        }        
+    }
+    catch(error)
+    {
+        console.log(error);
     }
 }
 

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async ()=>
     searchButton.addEventListener('click', ()=>
     {
         SetCriteria();        
-        
+        window.location.href = `itemsSearch.html?search=${searchCriteria}`;
     });
 
     // SEARCH INPUT (SEARCH BAR)
@@ -33,26 +33,26 @@ document.addEventListener('DOMContentLoaded', async ()=>
         if(e.key === "Enter")
         {
             SetCriteria();
-            
+            window.location.href = `itemsSearch.html?search=${searchCriteria}`;
         }
     });
 });
 
-function GetParamsData(name)
+function GetParamsData()
 {
-    let params;
-
-    var regex = new RegExp("[?]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(window.location.search);
-    if (!results || !results[2])
+    try
     {
-        params = false;
+        let results = window.location.search.split('=')[1];
+        let params = decodeURIComponent(results.replace(/\+/g, " "));
+    
+        if(params !== false)
+        {
+            gameParams = JSON.parse(params);
+        }
     }
-    params = decodeURIComponent(results[2].replace(/\+/g, " "));
-
-    if(params !== false)
+    catch(error)
     {
-        gameParams = JSON.parse(params);
+        console.log(error);
     }
 }
 
