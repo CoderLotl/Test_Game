@@ -1,5 +1,18 @@
+/**
+ * A class containing several filter methods which is intrinsecally tied to the game search mechanisms.
+ * Requires the target page to have the input types and ids the functions inside the class search for.
+ * @export
+ * @class ItemSearchFilters
+ */
 export class ItemSearchFilters
-{
+{    
+    /**
+     * Checks for the values of the Console checkboxes at the itemsSearch.html page.
+     * Adds a string value representing the console if the checkbox for that console is checked.
+     * Returns an array with the selected consoles.
+     * @return {Array | false} 
+     * @memberof ItemSearchFilters
+     */
     GetConsoles()
     {
         let selectedConsoles = [];
@@ -30,6 +43,13 @@ export class ItemSearchFilters
         }
     }
 
+    /**
+     * Checks for the values of the Genre checkboxes at the itemsSearch.html page.
+     * Adds a string value representing the console if the checkbox for that console is checked.
+     * Returns an array with the selected consoles.
+     * @return {Array | false} 
+     * @memberof ItemSearchFilters
+     */
     GetGenre()
     {
         let types = [];
@@ -92,6 +112,12 @@ export class ItemSearchFilters
         }
     }
 
+    /**
+     * Gets the values from the 2 text inputs corresponding to the min and max price for the game.
+     * Returns an array with 2 values, which are either null if the input is empty or 0, or the value.
+     * @return {Array} 
+     * @memberof ItemSearchFilters
+     */
     GetPriceRange()
     {
         let priceRange = [];
@@ -104,6 +130,12 @@ export class ItemSearchFilters
         return priceRange; // priceRange [ # / null, # / null];
     }
 
+    /**     
+     * Gets the values of the other filters and composes an unique filter array, which returns.
+     * @param {string} searchCriteria A string containing the name of the game to search for.
+     * @return {Array} 
+     * @memberof ItemSearchFilters
+     */
     GetFilter(searchCriteria)
     {
         let filters = {};

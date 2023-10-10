@@ -14,8 +14,8 @@ export class DataAccess
     }        
         
     /**
-     * Retrieves the whole data of the provided URL. Intended ONLY for .json files.
-     * @param {*} url string with the file's path.
+     * Retrieves the whole data of the provided URL. Intended ONLY for .json or .txt files.
+     * @param {string} url A string with the file's path.
      * @return {*} false | Array Returns false on failure, or an array on success.
      * @memberof DataAccess
      */
@@ -35,8 +35,9 @@ export class DataAccess
     /**
      * Retrieves a whole array of games from a .json file based on the search criteria and a string with the file's path.
      * Returns an array of objects.
-     * @param {*} urlTarget
-     * @param {*} searchCriteria
+     * @param {string} urlTarget A string with the file's path.
+     * @param {string} searchCriteria A string containing the name of the game to search for.
+     * @param {string} valorDolar A string/int containing the current price of the (blue) American Dollar.
      * @memberof DataAccess
      */
     async RetrieveGames(urlTarget, searchCriteria, valorDolar)
@@ -61,19 +62,26 @@ export class DataAccess
         }    
     }
 
-    async RetrieveGamesLite(urlTarget, valuesArray)
+    /**
+     * A simple way to check for a game with no filters other than the name and SKU. Returns the first game that matches (which is also the only one, due to double param check), or false if no game matches.
+     * @param {string} urlTarget A string with the file's path.
+     * @param {*} gameName
+     * @return {Array | false} 
+     * @memberof DataAccess
+     */
+    async RetrieveGamesLite(urlTarget, paramsArray)
     {             
         try
         {
-            const data = await this.FetchData(urlTarget);            
+            const data = await this.FetchData(urlTarget);                               
 
             if(data !== false)
             {                
                 for(let game of data)
-                {
-                    if(valuesArray.name == game.name)
-                    {                        
-                        return game;
+                {                    
+                    if(paramsArray.name == game.name && game.SKU == paramsArray.SKU) // We check for each game if the name and SKU of both the game and params match.
+                    {                                                
+                        return game; // We return the mach if there's any.
                     }
                 }
             }            
