@@ -6,13 +6,36 @@ let dataAccess = new DataAccess();
 let gameParams;
 let gameDetails = false;
 let valorDolar;
+let searchButton;
+let searchInput;
+let searchCriteria;
 
 document.addEventListener('DOMContentLoaded', async ()=>
 {
+    searchInput = document.getElementById('searchInput');
+    searchButton = document.getElementById('searchButton');
+
     valorDolar = await GetDollarValue();
     GetParamsData("data");
     gameDetails = await GetGameDetails();    
     DrawDetails();
+
+    // SEARCH BUTTON
+    searchButton.addEventListener('click', ()=>
+    {
+        SetCriteria();        
+        
+    });
+
+    // SEARCH INPUT (SEARCH BAR)
+    searchInput.addEventListener('keydown', (e)=>
+    {
+        if(e.key === "Enter")
+        {
+            SetCriteria();
+            
+        }
+    });
 });
 
 function GetParamsData(name)
@@ -82,4 +105,9 @@ function DrawDetails()
     videoIframe.id = 'gameVideo';
     videoIframe.setAttribute('allow', "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
     videoIframe.setAttribute('frameborder', 0);    
+}
+
+function SetCriteria()
+{
+    searchCriteria = searchInput.value;    
 }
