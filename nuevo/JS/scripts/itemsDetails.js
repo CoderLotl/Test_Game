@@ -58,4 +58,30 @@ function DrawDetails()
     {
         document.getElementById('gamePrice').textContent = `(U$) ${gameDetails.price}`
     }
+
+    document.getElementById('console').textContent = `Consola: ${gameDetails.console}`;
+    document.getElementById('type').textContent = `Género: ${gameDetails.type}`;
+    document.getElementById('age').textContent = `Edad: ${gameDetails.age}`;
+
+    let details = document.getElementById('details');
+    let descriptionTitle = document.createElement('h3');
+    details.appendChild(descriptionTitle);
+    descriptionTitle.textContent = 'Descripción';
+    let description = document.createElement('p');
+    details.appendChild(description);
+    description.id = 'gameDescription';
+    description.textContent = gameDetails.description;
+
+    let videoFrame = document.createElement('div');
+    details.appendChild(videoFrame);
+    videoFrame.id = 'videoFrame';
+
+    let videoIframe = document.createElement('iframe');
+    videoFrame.appendChild(videoIframe);
+    //video.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/9AyX2QqPKaY?si=Q8LbXAV0nYciLXqB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    videoIframe.src = `https://www.youtube.com/embed/${gameDetails.yt.split('v=')[1]}`;
+    videoIframe.id = 'gameVideo';
+    videoIframe.setAttribute('allow', "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+    videoIframe.setAttribute('frameborder', 0);
+    //GetVideoID(gameDetails.yt);
 }
