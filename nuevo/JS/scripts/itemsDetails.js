@@ -77,11 +77,9 @@ function DrawDetails()
     videoFrame.id = 'videoFrame';
 
     let videoIframe = document.createElement('iframe');
-    videoFrame.appendChild(videoIframe);
-    //video.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/9AyX2QqPKaY?si=Q8LbXAV0nYciLXqB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    videoFrame.appendChild(videoIframe);    
     videoIframe.src = `https://www.youtube.com/embed/${gameDetails.yt.split('v=')[1]}`;
     videoIframe.id = 'gameVideo';
     videoIframe.setAttribute('allow', "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
-    videoIframe.setAttribute('frameborder', 0);
-    //GetVideoID(gameDetails.yt);
+    videoIframe.setAttribute('frameborder', 0);    
 }
