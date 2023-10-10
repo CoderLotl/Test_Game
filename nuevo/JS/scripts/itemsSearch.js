@@ -1,6 +1,6 @@
 import { GetDollarValue } from "../services/APIDolar.js"; // Import of the API-consuming function.
-import { DataAccess } from "../classes/DataAccess.js";
-import { urlTarget } from "../config/config.js";
+import { DataAccess } from "../classes/DataAccess.js"; // Import of the DataAccess class, which interacts with the JSON file.
+import { urlTarget } from "../config/config.js"; // Import of the config file.
 
 let dataAccess = new DataAccess();
 let searchButton;
@@ -48,6 +48,11 @@ document.addEventListener('DOMContentLoaded', async ()=>
 // end of [ LOAD EVENT ]
 
 // FUNCTIONS
+
+/**
+ * Retrieves all the games matching the filters and draws the HTML which will represent them dynamically.
+ * If no game is found, it puts an image displaying the error in the corresponding container. 
+ */
 async function SearchGames()
 {
     let displayContainer = document.getElementById('itemsDisplay');
@@ -66,6 +71,11 @@ async function SearchGames()
     imgError.src = '../Images/error.png';
 }
 
+/** 
+ * Gets the game data and the HTML container element and creates an object which represents the game, displaying the data, then inserting it in the container.
+ * @param {Array} game An associative array representing the game and containing its data.
+ * @param {*} displayContainer An HTML element.
+ */
 function DrawGameArticle(game, displayContainer)
 {
     console.log(game.name);
@@ -108,6 +118,11 @@ function DrawGameArticle(game, displayContainer)
     }
 }
 
+/**
+ * Returns a string containing the name and SKU of the game. 
+ * @param {Array} game An associative array representing the game and containing its data.
+ * @return {string} 
+ */
 function GetURLParams(game)
 {
     let gameData = 
