@@ -102,9 +102,9 @@ export class DataAccess
     }
 
     /**     
-     * Provides
+     * Provides a function to filter the games based on name, price, genre, and console.
      * @param {Array} params
-     * @return {*} 
+     * @return {bool} 
      * @memberof DataAccess
      */
     FilterData(params)
@@ -146,7 +146,15 @@ export class DataAccess
                     {
                         return false; // IF A GAME DOESN'T MATCH WITH SOME OF THE VALUES, IT'S NOT INCLUDED.
                     }
-                }            
+                }
+                else if(key === 'type')
+                {
+                    let selectedGenre = params[key];
+                    if(!selectedGenre.includes(item[key]))
+                    {
+                        return false;
+                    }
+                }
             }
             return true;
         };

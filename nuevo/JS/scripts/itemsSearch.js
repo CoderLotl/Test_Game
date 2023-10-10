@@ -66,9 +66,12 @@ async function SearchGames()
             DrawGameArticle(game, displayContainer);
         });
     }
-    let imgError = document.createElement('img');
-    displayContainer.appendChild(imgError);
-    imgError.src = '../Images/error.png';
+    else
+    {
+        let imgError = document.createElement('img');
+        displayContainer.appendChild(imgError);
+        imgError.src = '../Images/error.png';
+    }
 }
 
 /** 
@@ -134,6 +137,10 @@ function GetURLParams(game)
     return encodeURIComponent(JSON.stringify(gameData));
 }
 
+/**
+ * Sets the money tipe representation in the Price container and, if the API returned a value, sets the title of the 'help' image stating the current
+ * date and parity. Else, sets the title saying the API didn't answer.
+ */
 function SetPriceTag()
 {
     let priceTag = document.getElementById('priceTag');
@@ -161,6 +168,10 @@ function SetPriceTag()
     }
 }
 
+/**
+ * Intended to run after the page load. Checks for if there are any params in the page's URL for a game search and,
+ * if there are, tries to search for the game. 
+ */
 function AutoSearchByReceivedParams()
 {
     try
@@ -177,6 +188,9 @@ function AutoSearchByReceivedParams()
     }
 }
 
+/**
+ * Retrieves the value of the search bar input and sets it as the search criteria.
+ */
 function SetCriteria()
 {
     searchCriteria = searchInput.value;
