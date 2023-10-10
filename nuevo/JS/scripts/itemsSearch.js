@@ -53,14 +53,17 @@ async function SearchGames()
     let displayContainer = document.getElementById('itemsDisplay');
     
     let games = await dataAccess.RetrieveGames(urlTarget, searchCriteria, valorDolar);
+    displayContainer.innerHTML = '';
     if(games !== false)
     {
-        displayContainer.innerHTML = '';
         games.forEach(game =>
         {
             DrawGameArticle(game, displayContainer);
         });
     }
+    let imgError = document.createElement('img');
+    displayContainer.appendChild(imgError);
+    imgError.src = '../Images/error.png';
 }
 
 function DrawGameArticle(game, displayContainer)

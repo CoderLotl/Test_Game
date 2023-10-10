@@ -52,8 +52,16 @@ export class DataAccess
                 filters.valorDolar = valorDolar;
                 let filterFunction = this.FilterData(filters);
                 let result = data.filter(filterFunction);
-                return result;
-            }
+                
+                if(result.length > 0)
+                {                    
+                    return result;
+                }
+                else
+                {
+                    return false;
+                }
+            }            
         }
         catch(error)
         {
@@ -65,7 +73,7 @@ export class DataAccess
     /**
      * A simple way to check for a game with no filters other than the name and SKU. Returns the first game that matches (which is also the only one, due to double param check), or false if no game matches.
      * @param {string} urlTarget A string with the file's path.
-     * @param {*} gameName
+     * @param {Array} paramsArray A standard JS object with 2 pairs of key-value: name, and SKU.
      * @return {Array | false} 
      * @memberof DataAccess
      */
@@ -93,6 +101,12 @@ export class DataAccess
         }
     }
 
+    /**     
+     * Provides
+     * @param {Array} params
+     * @return {*} 
+     * @memberof DataAccess
+     */
     FilterData(params)
     {    
         let funct = function(item)

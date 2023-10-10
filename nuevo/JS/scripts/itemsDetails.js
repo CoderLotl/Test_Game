@@ -16,9 +16,12 @@ document.addEventListener('DOMContentLoaded', async ()=>
     searchButton = document.getElementById('searchButton');
 
     valorDolar = await GetDollarValue();
-    GetParamsData("data");
-    gameDetails = await GetGameDetails();    
-    DrawDetails();
+    gameParams = GetParamsData();
+    if(gameParams !== false)
+    {
+        gameDetails = await GetGameDetails();    
+        DrawDetails();
+    }
 
     // SEARCH BUTTON
     searchButton.addEventListener('click', ()=>
@@ -47,12 +50,13 @@ function GetParamsData()
     
         if(params !== false)
         {
-            gameParams = JSON.parse(params);
+            return JSON.parse(params);
         }
     }
     catch(error)
     {
         console.log(error);
+        return false;
     }
 }
 
