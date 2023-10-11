@@ -107,6 +107,11 @@ function DrawGameArticle(game, displayContainer)
     let titleParams = GetURLParams(game);
     titleContent.href = `itemsDetails.html?data=${titleParams}`;
 
+    let itemConsole = document.createElement('p');
+    itemBrief.appendChild(itemConsole);
+    let gameType = TranslateGenre(game.type);
+    itemConsole.innerHTML = "Consola: " + game.console + "<br><br>Género: " + gameType;
+
     let itemPrice = document.createElement('h2');
     itemBrief.appendChild(itemPrice);
     itemPrice.classList = 'itemPrice';
@@ -195,4 +200,31 @@ function SetCriteria()
 {
     searchCriteria = searchInput.value;
     searchInput.blur();    
+}
+
+function TranslateGenre(genre)
+{
+    switch(genre)
+    {
+        case 'sim':
+            return "Simulación";
+        case 'racing':
+            return "Carreras";
+        case 'platforms':
+            return "Plataformas";
+        case 'stealth':
+            return "Sigilo";
+        case 'sports':
+            return "Deportes";
+        case 'action':
+            return "Acción";
+        case 'strategy':
+            return "Estrategia";
+        case 'shooter':
+            return "Disparos";
+        case 'adventure':
+            return "Aventura";
+        default:
+            return genre.charAt(0).toUpperCase() + genre.slice(1);
+    }
 }
